@@ -1,8 +1,8 @@
-\subsection{Einstein-Test oder Zebrapuzzle}
+\section{Einstein-Test oder Zebrapuzzle}
 
-Bei diesem R"atsel geht es darum, aus einer Menge von 5 Personen, die sich alles jeweils durch die Farbe ihres Hauses, ihr Getr"ank, Haustier, ihre Zigarettenmarke und ihrer Nationalit"at unterscheiden, mithilfe von unvollst"andiger Informationen und einem logischen L"osungsansatz, genau eine Person mit einer gewissen Eigenschaft herauszufinden. Näheres z.B. auf Wikipedia.
+Bei diesem R"atsel geht es darum, aus einer Menge von 5 Personen, die sich alles jeweils durch die Farbe ihres Hauses, ihr Getr"ank, Haustier, ihre Zigarettenmarke und ihrer Nationalit"at unterscheiden, mithilfe von unvollst"andiger Informationen und einem logischen L"osungsansatz, genau eine Person mit einer gewissen Eigenschaft herauszufinden. N"aheres z.B. auf Wikipedia.
 
-\subsubsection{Code}
+\subsection{Code}
 
 Das entsprechendes Codebeispiel kann auf folgender Seite \url{https://github.com/swannodette/logic-tutorial#zebras} gefunden werden.
 
@@ -14,7 +14,7 @@ Die Methode \code{righto}
   ([_ _ [_ . ?r]] (righto x y ?r)))
 \end{lstlisting}
 
-erzeugt Pr"adikate um alle Permutationen eines Objekts zu bekommen, wenn es sich auf der rechten Seite befindet. Ein rekursiver Aufruf sorgt für die Ausgabe aller geforderten Pr"adikate.
+erzeugt Pr"adikate um alle Permutationen eines Objekts zu bekommen, wenn es sich auf der rechten Seite befindet. Ein rekursiver Aufruf sorgt f"ur die Ausgabe aller geforderten Pr"adikate.
 
 Die Methode \code{nexto}
 
@@ -50,4 +50,4 @@ Die Methode \code{zebrao}
 \end{lstlisting}
 
 enth"alt s"amtliche Regeln in Pr"adikatenform. Die erste Zeile enth"alt z.B. zwei Regeln. Einmal die Regel, das es f"unf H"auser gibt und die Regel, das die Person im mittleren Haus trinkt Milch trinkt. Die zweite Regel sagt aus, das die Person ganz links (firsto, "der Erste") norwegisch ist. Die Dritte, das neben der norwegischen Person ein blaues Haus steht und so weiter.
-Im Programmcode werden in der zweiten Zeile die Zeichen "lvar" an das Symbol "_" gebunden. Das erspart einige Zeichen Code und erhöt die Lesbarkeit.
+Im Programmcode werden in der zweiten Zeile die Zeichen \dq{}lvar\dq{} an das Symbol \dq{}\_\dq{} gebunden. Das erspart einige Zeichen Code und erhöt die Lesbarkeit.
