@@ -16,6 +16,6 @@ https://docs.google.com/document/d/1WQayW9dqWKbtl8Sg-ec1KJmfrH58xV0EJXyyuqk9Ti4/
 https://trello-attachments.s3.amazonaws.com/54c629961249457153f8f798/54d374620e63fee2dc91c52b/1b689bcdcd50690143e3c0161a1642cb/HemannMuKanren2013.pdf
 
 ### Webseiten
- - miniKanren.org
+ - http://miniKanren.org
  - https://github.com/frenchy64/Logic-Starter/wiki
  - https://github.com/clojure/core.logic
