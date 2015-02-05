@@ -1,0 +1,30 @@
+\subsection{Syntax}
+
+Da in Clojure umgesetzt, findet sich jeder Eingeweite schnell zurecht. Ähnlich zu Scheme?
+
+\subsection{Aufruf der Instanz eines Lösungsautomaten oder auch Solver}
+
+\begin{lstlistings}
+    (run* [logic-variable] &constraints)
+\end{lstlistings}
+
+
+Tafelbild: (run* [q] (== 1 q) ) ; Rückgabe --> 1
+(run* ...) -> Befehl für den Solver; * ist Anzahl der Ergebnisse, kann auch entsprechend eine Zahl sein.
+[q] -> ist die logische Variable für die ein oder mehrere Werte gesucht wird
+(== 1 q) -> ist die Beschränkung für q.
+“Gib alle Werte für q zurück für die gilt: q == 1”
+
+
+\subsection{Logische Ausdrücke}
+
+Ein logischer Ausdruck ist also eine Anweisung für den Solver und besteht aus den folgenden Teilen:
+\begin{itemize}
+
+\item eine Menge von logischen Variablen
+
+\item eine Menge von Beschränkungen auf die Werte die die logischen Variablen annehmen können
+
+\end{itemize}
+
+Je nach Ausdruck, ist die Anzahl der logischen Variablen die diese Einführen unterschiedlich. (run ..) zum Beispiel kann nur 1 lvar einführen.
