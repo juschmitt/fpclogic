@@ -2,7 +2,9 @@
 
 Bei diesem R"atsel geht es darum, aus einer Menge von 5 Personen, die sich alles jeweils durch die Farbe ihres Hauses, ihr Getr"ank, Haustier, ihre Zigarettenmarke und ihrer Nationalit"at unterscheiden, mithilfe von unvollst"andiger Informationen und einem logischen L"osungsansatz, genau eine Person mit einer gewissen Eigenschaft herauszufinden. Näheres z.B. auf Wikipedia.
 
-Ein entsprechendes Codebeispiel kann man auf folgender Seite finden \url{https://github.com/swannodette/logic-tutorial#zebras} finden.
+\subsubsection{Code}
+
+Das entsprechendes Codebeispiel kann auf folgender Seite \url{https://github.com/swannodette/logic-tutorial#zebras} gefunden werden.
 
 Die Methode \code{righto}
 
@@ -11,3 +13,41 @@ Die Methode \code{righto}
   ([_ _ [x y . ?r]])
   ([_ _ [_ . ?r]] (righto x y ?r)))
 \end{lstlisting}
+
+erzeugt Pr"adikate um alle Permutationen eines Objekts zu bekommen, wenn es sich auf der rechten Seite befindet. Ein rekursiver Aufruf sorgt für die Ausgabe aller geforderten Pr"adikate.
+
+Die Methode \code{nexto}
+
+\begin{lstlisting}
+(defn nexto [x y 1]
+  (conde
+    ((righto x y 1))
+    ((righto y x 1))))
+\end{lstlisting}
+
+erzeugt Pr"adikate um alle Permutationen eines Objektes zu bekommen, wenn es sich daneben befindet.
+
+Die Methode \code{zebrao}
+
+\begin{lstlisting}
+(defn zebrao [hs]
+  (macro/symbol-macrolet [_ (lvar)]
+    (all
+     (== [_ _ [_ _ 'milk _ _] _ _] hs)
+     (firsto hs ['norwegian _ _ _ _])
+     (nexto ['norwegian _ _ _ _] [_ _ _ _ 'blue] hs)
+     (righto [_ _ _ _ 'ivory] [_ _ _ _ 'green] hs)
+     (membero ['englishman _ _ _ 'red] hs)
+     (membero [_ 'kools _ _ 'yellow] hs)
+     (membero ['spaniard _ _ 'dog _] hs)
+     (membero [_ _ 'coffee _ 'green] hs)
+     (membero ['ukrainian _ 'tea _ _] hs)
+     (membero [_ 'lucky-strikes 'oj _ _] hs)
+     (membero ['japanese 'parliaments _ _ _] hs)
+     (membero [_ 'oldgolds _ 'snails _] hs)
+     (nexto [_ _ _ 'horse _] [_ 'kools _ _ _] hs)
+     (nexto [_ _ _ 'fox _] [_ 'chesterfields _ _ _] hs))))
+\end{lstlisting}
+
+enth"alt s"amtliche Regeln in Pr"adikatenform. Die erste Zeile enth"alt z.B. zwei Regeln. Einmal die Regel, das es f"unf H"auser gibt und die Regel, das die Person im mittleren Haus trinkt Milch trinkt. Die zweite Regel sagt aus, das die Person ganz links (firsto, "der Erste") norwegisch ist. Die Dritte, das neben der norwegischen Person ein blaues Haus steht und so weiter.
+Im Programmcode werden in der zweiten Zeile die Zeichen "lvar" an das Symbol "_" gebunden. Das erspart einige Zeichen Code und erhöt die Lesbarkeit.
