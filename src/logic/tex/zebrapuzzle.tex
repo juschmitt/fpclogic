@@ -1,5 +1,13 @@
 \subsection{Einstein-Test oder Zebrapuzzle}
 
-Bei diesem Rätsel geht es darum, aus einer Menge von 5 Personen, die sich alles jeweils durch die Farbe ihres Hauses, ihr Getränk, Haustier, ihre Zigarettenmarke und ihrer Nationalität unterscheiden, mithilfe von unvollständiger Informationen und einem logischen Lösungsansatz, genau eine Person mit einer gewissen Eigenschaft herauszufinden. Näheres z.B. auf Wikipedia.
+Bei diesem R"atsel geht es darum, aus einer Menge von 5 Personen, die sich alles jeweils durch die Farbe ihres Hauses, ihr Getr"ank, Haustier, ihre Zigarettenmarke und ihrer Nationalit"at unterscheiden, mithilfe von unvollst"andiger Informationen und einem logischen L"osungsansatz, genau eine Person mit einer gewissen Eigenschaft herauszufinden. Näheres z.B. auf Wikipedia.
 
+Ein entsprechendes Codebeispiel kann man auf folgender Seite finden \url{https://github.com/swannodette/logic-tutorial#zebras} finden.
 
+Die Methode \code{righto}
+
+\begin{lstlisting}
+(defne righto [x y l]
+  ([_ _ [x y . ?r]])
+  ([_ _ [_ . ?r]] (righto x y ?r)))
+\end{lstlisting}
