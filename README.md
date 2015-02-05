@@ -19,3 +19,4 @@ https://trello-attachments.s3.amazonaws.com/54c629961249457153f8f798/54d374620e6
  - http://miniKanren.org
  - https://github.com/frenchy64/Logic-Starter/wiki
  - https://github.com/clojure/core.logic
+ - https://github.com/swannodette/logic-tutorial
