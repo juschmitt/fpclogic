@@ -2,11 +2,47 @@
 
 Da in Clojure umgesetzt, findet sich jeder Eingeweite schnell zurecht. Ähnlich zu Scheme?
 
-\subsection{Aufruf der Instanz eines Lösungsautomaten oder auch Solver}
+\subsubsection{Funktionen}
+core.logic basiert genauso wie miniKanren auf 3 grundlegenden Funktionen.
 
-\begin{lstlistings}
+fresh:
+Mit fresh lassen sich beliebig viele neue logische Variablen ins Programm einf"uhren. Variablen die durch fresh eingef"uhrt wurden, sind auch nur innerhalb von diesem g"ultig, d.h. lvars innerhalb von fresh müssen auf eine außerhalb von fresh g"ultige lvar "ubertragen werden.
+
+unify:
+unify setzt lvars gleich. Entweder zu anderen lvars oder zu Werten. Mit unify lassen sich so zB lvars innerhalb von fresh auf eine lvar außerhalb von fresh "ubetragen.
+
+conde:
+Mit conde ("ahnlich zu cond aus dem clojure.core Paket) lassen sich Constraints so gesagt “verodern”. dh es erzeugt eine logische Disjunktion von Constraints.
+
+Beispiel:
+(run* [q]
+    (conde
+        ((constraint-1))
+            *OR*
+        ((constraint-2a) *AND* (constraint-2b))
+            *OR*
+        ((constraint-3a) *AND* (constraint-3b) *AND* (constraint-3c))
+)
+
+Das sind die 3 grundlegenden Funktionen von core.logic, es gibt noch weitere, wie zB das eben gesehene (membero …), diese bauen aber alle auf den 3 Basis Funktionen auf.
+H"ohere Funktionen, folgen einer bestimmten Namenskonvention, wie zB zu sehen bei conde und memebero, werden Funktionen in core.logic die schon im clojure.core existieren mit einem a,e,u oder o um diese von den regulären clojure Funktionen zu differenzieren und diese eventuell nicht zu überschreiben.
+
+Ein nachgestelltes 
+\begin{itemize}
+  \item a steht für 
+  
+  \item e steht für 
+  
+  \item u steht für 
+  
+  \item o steht für die Rückgabe von Goals
+\end{itemize}
+
+\subsubsection{Aufruf der Instanz eines Lösungsautomaten oder auch Solver}
+
+\begin{lstlisting}
     (run* [logic-variable] &constraints)
-\end{lstlistings}
+\end{lstlisting}
 
 
 Tafelbild: (run* [q] (== 1 q) ) ; Rückgabe --> 1
@@ -14,17 +50,3 @@ Tafelbild: (run* [q] (== 1 q) ) ; Rückgabe --> 1
 [q] -> ist die logische Variable für die ein oder mehrere Werte gesucht wird
 (== 1 q) -> ist die Beschränkung für q.
 “Gib alle Werte für q zurück für die gilt: q == 1”
-
-
-\subsection{Logische Ausdrücke}
-
-Ein logischer Ausdruck ist also eine Anweisung für den Solver und besteht aus den folgenden Teilen:
-\begin{itemize}
-
-\item eine Menge von logischen Variablen
-
-\item eine Menge von Beschränkungen auf die Werte die die logischen Variablen annehmen können
-
-\end{itemize}
-
-Je nach Ausdruck, ist die Anzahl der logischen Variablen die diese Einführen unterschiedlich. (run ..) zum Beispiel kann nur 1 lvar einführen.

@@ -1,4 +1,4 @@
-\subsection{Grundsätze}
+\subsection{Grunds"atze}
 
 \subsubsection{core.logic}
 
@@ -6,20 +6,20 @@ core.logic ist eine Implementierung des auf Scheme basierenden Solvers: miniKanr
 
 Kanren ist Japanisch und bedeutet so viel wie Relation.
 
-Prinzipiell ist das miniKanren zusammengefasst: Wenn miniKanren ein Ausdruck und eine gewünschte Ausgabe gegeben wird, kann es dies “Rückwärts” ausführen und findet dabei alle möglichen Eingaben zu dem Ausdruck der die gewünschte Ausgabe erzeugt hat.
+miniKanren in einem Satz: Wenn miniKanren ein Ausdruck und eine gew"unschte Ausgabe gegeben wird, kann es dies “R"uckw"arts” ausführen und findet dabei alle m"oglichen Eingaben zu dem Ausdruck der die gew"unschte Ausgabe erzeugt hat.
 
-\subsubsection{Logische Ausdrücke}
+\subsubsection{Logische Ausdr"ucke}
 
 Ein logischer Ausdruck ist also eine Anweisung für den Solver und besteht aus den folgenden Teilen:
 \begin{itemize}
 
 \item eine Menge von logischen Variablen
 
-\item eine Menge von Beschränkungen auf die Werte die die logischen Variablen annehmen können
+\item eine Menge von Beschr"ankungen auf die Werte, die die logischen Variablen annehmen k"onnen
 
 \end{itemize}
 
-Je nach Ausdruck, ist die Anzahl der logischen Variablen die diese Einführen unterschiedlich. (run ..) zum Beispiel kann nur 1 lvar einführen.
+Je nach Ausdruck, ist die Anzahl der logischen Variablen, die diese Einf"uhren unterschiedlich. (run ..) zum Beispiel, kann nur eine lvar einf"uhren.
 
 
 \subsubsection{Logische Variablen}
@@ -27,23 +27,28 @@ Logische Variablen sind Container für einen nicht eindeutigen Wert. Das heißt,
 //Wie sind die logischen Variablen implementiert? [...]
 Logische Variablen können spezielle Werte haben, zum Beispiel _0 
 Tafelbild: (run* [q] (== q q)) ; Rückgabe --> _0
-In diesem Fall wird _0 zurückgegeben, was so viel bedeutet wie: q kann jeden beliebigen Wert annehmen und erfüllt immer die Beschränkung.
+In diesem Fall wird _0 zur"uckgegeben, was so viel bedeutet wie: q kann jeden beliebigen Wert annehmen und erf"ullt immer die Beschr"ankung.
 Für den Fall, dass wir mehrere logische Variablen haben (zB 2) und beide können jeden beliebigen Wert annehmen, müssen aber gleich sein ist die Rückgabe (_0 _0) können beide distinkt voneinander sein: (_0 _1).
-Logische Variablen werden auf 2 Arten in ein logisches Programm eingeführt:
+Logische Variablen werden auf 2 Arten in ein logisches Programm eingef"uhrt:
 (run* [q] …)
 (fresh [...] …)
-Während (run* ...) immer nur 1 logische Variable einführen kann, führt (fresh …) beliebig viele ein, muss aber innerhalb von einem (run* …) Befehl stehen.
+Während (run* ...) immer nur 1 logische Variable einf"uhren kann, f"uhrt (fresh …) beliebig viele ein, muss aber innerhalb von einem (run* …) Befehl stehen.
 
-\subsubsection{Beschränkungen}
+\subsubsection{Beschr"ankungen}
 
 Beschränkungen oder auch Constraints sind Ausdrücke die die Werte die eine logische Variable annehmen kann, beschränken. Es können mehrere Beschränkungen existieren die untereinander in einer Konjunktion stehen:
-\begin{lstlistings}
+\begin{lstlisting}
 (run* [q]
     (constraint-1)
     (constraint-2)
     (constraint-3)
 )
-\end{lstlistings}
-Hier muss ein Wert alle 3 Constraints erfüllen, um als Wert von q angenommen werden zu können.
-Im Beispiel am Beamer muss ein Wert in den beiden Mengen \code{[1 2 3]} und \code{[2 3 4]} beinhaltet sein, um von q als Wert angenommen zu werden. Ergebnis wäre hier \code{[2 3]}.
+\end{lstlisting}
+
+Hier muss ein Wert alle 3 Constraints erf"ullen, um als Wert von q angenommen werden zu k"onnen.
+\begin{lstlisting}
+Beispiel aus der Präsentation
+\end{lstlisting}
+
+Im Beispiel muss ein Wert in den beiden Mengen \code{[1 2 3]} und \code{[2 3 4]} beinhaltet sein, um von q als Wert angenommen zu werden. Ergebnis wäre hier \code{[2 3]}.
 
