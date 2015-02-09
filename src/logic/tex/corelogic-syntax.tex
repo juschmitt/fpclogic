@@ -1,9 +1,12 @@
 \subsection{Syntax}
 
-Da in Clojure umgesetzt, findet sich jeder Eingeweite schnell zurecht. Ähnlich zu Scheme?
+\subsubsection{Allgemeines}
 
-\subsubsection{Funktionen}
-core.logic basiert genauso wie miniKanren auf 3 grundlegenden Funktionen.
+
+
+\subsubsection{Wichtige Funktionen}
+
+core.logic basiert, "ahnlich wie miniKanren, auf 3 grundlegenden Funktionen.
 
 fresh:
 Mit fresh lassen sich beliebig viele neue logische Variablen ins Programm einf"uhren. Variablen die durch fresh eingef"uhrt wurden, sind auch nur innerhalb von diesem g"ultig, d.h. lvars innerhalb von fresh müssen auf eine außerhalb von fresh g"ultige lvar "ubertragen werden.
@@ -15,17 +18,25 @@ conde:
 Mit conde ("ahnlich zu cond aus dem clojure.core Paket) lassen sich Constraints so gesagt “verodern”. dh es erzeugt eine logische Disjunktion von Constraints.
 
 Beispiel:
+\begin{lstlisting}
 (run* [q]
     (conde
-        ((constraint-1))
-            *OR*
-        ((constraint-2a) *AND* (constraint-2b))
-            *OR*
-        ((constraint-3a) *AND* (constraint-3b) *AND* (constraint-3c))
+        ((unify q 2))
+	  *OR*
+        ((unify q 1) *AND* (unify q q))
+	  *OR*
+	((fresh [r s] 
+	  (unify r 1)
+	    *AND*
+	  (unify s 2)
+	    *AND*
+	  (unify r q)
+	    *AND*
+	  (unify s q))
 )
+\end{lstlisting}
 
-Das sind die 3 grundlegenden Funktionen von core.logic, es gibt noch weitere, wie zB das eben gesehene (membero …), diese bauen aber alle auf den 3 Basis Funktionen auf.
-H"ohere Funktionen, folgen einer bestimmten Namenskonvention, wie zB zu sehen bei conde und memebero, werden Funktionen in core.logic die schon im clojure.core existieren mit einem a,e,u oder o um diese von den regulären clojure Funktionen zu differenzieren und diese eventuell nicht zu überschreiben.
+Das sind die 3 grundlegenden Funktionen von core.logic. Das gesamte Package beinhaltet aber natürlich noch viele mehr, Wie z.B. das eben gesehene (membero …). Alle weiteren Funktionen im Package bauen aber auf den 3 Basis Funktionen auf. H"ohere Funktionen, folgen einer bestimmten Namenskonvention, wie z.B. zu sehen bei conde und memebero, werden Funktionen in core.logic die schon im clojure.core existieren mit einem a,e,u oder o um diese von den regulären clojure Funktionen zu differenzieren und diese eventuell nicht zu überschreiben.
 
 Ein nachgestelltes 
 \begin{itemize}
@@ -35,7 +46,8 @@ Ein nachgestelltes
   
   \item u steht für 
   
-  \item o steht für die Rückgabe von Goals
+  \item o steht für die Rückgabe von Goals bzw. einer Relation
+
 \end{itemize}
 
 \subsubsection{Aufruf der Instanz eines Lösungsautomaten oder auch Solver}
