@@ -1,0 +1,49 @@
+\section{Constraint Logic Programming}
+Nach dem aktuellen Stand unterstützt core.logic bereits die beiden Formen des Constraint Logic Programming ''disequality constraints over trees'' auch CLP(Tree) und ''constraints over finite domains'' auch CLP(FD).
+Constraint logic programming ist sehr ähnlich zur regulären logischen Programmierung, allerdings arbeitet der Interpreter mit Backtracking und einem ''constraint store'' in den er alle Constraints schreiben kann, um die Erfüllbarkeit aller Constraints auf einer logischen Variable einfacher überprüfen zu können.
+
+\subsection{CLP(Tree)}
+Diese Form des constraint logic programming emuliert die reguläre logische Programmierung, in dem der Interpreter nur Subsitutionen als constraints in den ''constraint store'' schreibt. 
+Die Terme der Substitutionen sind Variablen, Konstanten und Funktionen die auf andere Terme angewandt werden. 
+Die einzigen Constraints die als solche anerkannt werden sind Gleichsetzungen (==) und Ungleichsetzungen (!=).
+core.logic führt dazu erstmals einen neuen Operator ein: != . Dieser Garantiert, dass zwei gegebene Terme niemals unifiziert werden können.
+Das einfachste Beispiel dazu ist eine Überprüfung, ob eine Variable nicht gleich einem Wert ist:
+\begin{lstlisting}
+(run * [q]
+	(!= q 1)
+)
+\end{lstlisting}
+Das Ergebnis dazu sieht so aus: \code{((\_0 :- (!= \_0 1)))} Das liest sich wie folgt: q kann jeden Wert annehmen, solange dieser Wert nicht gleich 1 ist.
+
+\subsection{CLP(FD)}
+Constraint logic programming over finite domains arbeitet mit endlichen Mengen und weist diese Variablen zu. So kann eine Variable zum Beispiel eine Zahl zwischen 1 und 5 annehmen. Das Paket core.logic.fd führt auch noch einige weitere neue Operatoren ein:
+\begin{itemize}
+\item{\code{+}}
+\item{\code{-}}
+\item{\code{*}}
+\item{\code{quot}}
+\item{\code{==}}
+\item{\code{!=}}
+\item{\code{<}}
+\item{\code{<=}}
+\item{\code{>}}
+\item{\code{>=}}
+\item{\code{distinct}}
+\end{itemize}
+Logische Variablen werden hier mit \code{fd/in} eingeführt.
+\begin{lstlisting}
+(run * [q]
+	(fd/in q (fd/interval 1 5))
+}
+\end{lstlisting}
+q erhält hier die Werte (1 2 3 4 5)
+Ein weitere Beispiel dazu:
+\begin{lstlisting}
+(run * [q]
+	(fresh [x y]
+	(fd/in x y (fd/interval 1 10))
+	(fd/+ x y 10)
+	(== q [x y]))
+)
+\end{lstlisting}
+Ergebnis: \code{([1 9][2 8][3 7][4 6][5 5][6 4][7 3][8 2][9 1])}
