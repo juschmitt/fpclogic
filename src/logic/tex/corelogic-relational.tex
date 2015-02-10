@@ -1,6 +1,10 @@
-\subsection{Relationale Programmierung}
+\section{Relationale Programmierung}
 
-Eine Relation plus stellt eine Abbildung des Kreuzprodukts zweier nat"urlicher Zahlen auf eine nat"urliche Zahl dar.
+
+
+\subsection{Beispiel}
+
+Eine Relation plus stellt eine Abbildung des Kreuzprodukts zweier natürlicher Zahlen auf eine natürliche Zahl dar.
 
 \begin{lstlisting}
 plus: N x N -> N
@@ -10,14 +14,14 @@ plus: N x N -> N
 				2   2   4
 \end{lstlisting}
 
-Somit k"onnen wir unseren Solver nutzen, um zu pr"ufen ob eine bestimmte Kombination von Argumenten erlaubt ist.
+Somit können wir unseren Solver nutzen, um zu prüfen ob eine bestimmte Kombination von Argumenten erlaubt ist.
 \begin{lstlisting}
 plus_o Relation	 N x N x N
 		-(1 1 1)- nicht erlaubt
 		 (1 1 2) erlaubt
 \end{lstlisting}
 
-Relationale Programmierung kann r"uckw"arts ausgewertet werden
+Relationale Programmierung kann rückwärts ausgewertet werden
 
 \begin{lstlisting}
 (run* [q] (== q (plus_o (1 1 q))))
