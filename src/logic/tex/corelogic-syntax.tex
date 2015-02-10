@@ -1,21 +1,21 @@
-\subsection{Syntax}
+\section{Syntax}
 
-\subsubsection{Allgemeines}
+\subsection{Allgemeines}
 
 
 
-\subsubsection{Wichtige Funktionen}
+\subsection{Wichtige Funktionen}
 
 core.logic basiert, "ahnlich wie miniKanren, auf 3 grundlegenden Funktionen.
 
 fresh:
-Mit fresh lassen sich beliebig viele neue logische Variablen ins Programm einf"uhren. Variablen die durch fresh eingef"uhrt wurden, sind auch nur innerhalb von diesem g"ultig, d.h. lvars innerhalb von fresh müssen auf eine außerhalb von fresh g"ultige lvar "ubertragen werden.
+Mit fresh lassen sich beliebig viele neue logische Variablen ins Programm einf"uhren. Variablen die durch fresh eingef"uhrt wurden, sind auch nur innerhalb von diesem g"ultig, d.h. lvars innerhalb von fresh m"ussen auf eine au\ss{}erhalb von fresh g"ultige lvar "ubertragen werden.
 
 unify:
-unify setzt lvars gleich. Entweder zu anderen lvars oder zu Werten. Mit unify lassen sich so zB lvars innerhalb von fresh auf eine lvar außerhalb von fresh "ubetragen.
+unify setzt lvars gleich. Entweder zu anderen lvars oder zu Werten. Mit unify lassen sich so zB lvars innerhalb von fresh auf eine lvar au\ss{}erhalb von fresh "ubetragen.
 
 conde:
-Mit conde ("ahnlich zu cond aus dem clojure.core Paket) lassen sich Constraints so gesagt “verodern”. dh es erzeugt eine logische Disjunktion von Constraints.
+Mit conde ("ahnlich zu cond aus dem clojure.core Paket) lassen sich Constraints so gesagt \dq{}verodern\dq{}. Das heiss{}t es erzeugt eine logische Disjunktion von Constraints.
 
 Beispiel:
 \begin{lstlisting}
@@ -36,29 +36,29 @@ Beispiel:
 )
 \end{lstlisting}
 
-Das sind die 3 grundlegenden Funktionen von core.logic. Das gesamte Package beinhaltet aber natürlich noch viele mehr, Wie z.B. das eben gesehene (membero …). Alle weiteren Funktionen im Package bauen aber auf den 3 Basis Funktionen auf. H"ohere Funktionen, folgen einer bestimmten Namenskonvention, wie z.B. zu sehen bei conde und memebero, werden Funktionen in core.logic die schon im clojure.core existieren mit einem a,e,u oder o um diese von den regulären clojure Funktionen zu differenzieren und diese eventuell nicht zu überschreiben.
+Das sind die 3 grundlegenden Funktionen von core.logic. Das gesamte Package beinhaltet aber nat"urlich noch viele mehr, Wie z.B. das eben gesehene (membero \dots{}). Alle weiteren Funktionen im Package bauen aber auf den 3 Basis Funktionen auf. H"ohere Funktionen, folgen einer bestimmten Namenskonvention, wie z.B. zu sehen bei conde und memebero, werden Funktionen in core.logic die schon im clojure.core existieren mit einem a,e,u oder o um diese von den regul"aren clojure Funktionen zu differenzieren und diese nicht zu "uberschreiben.
 
 Ein nachgestelltes 
 \begin{itemize}
-  \item a steht für 
+  \item a steht f"ur 
   
-  \item e steht für 
+  \item e steht f"ur 
   
-  \item u steht für 
+  \item u steht f"ur 
   
-  \item o steht für die Rückgabe von Goals bzw. einer Relation
+  \item o steht f"ur die R"uckgabe von Goals bzw. einer Relation
 
 \end{itemize}
 
-\subsubsection{Aufruf der Instanz eines Lösungsautomaten oder auch Solver}
+\subsection{Aufruf der Instanz eines L"osungsautomaten oder auch Solver}
 
 \begin{lstlisting}
     (run* [logic-variable] &constraints)
 \end{lstlisting}
 
 
-Tafelbild: (run* [q] (== 1 q) ) ; Rückgabe --> 1
-(run* ...) -> Befehl für den Solver; * ist Anzahl der Ergebnisse, kann auch entsprechend eine Zahl sein.
+Tafelbild: (run* [q] (== 1 q) ) ; R"uckgabe --> 1
+(run* \dots{}) -> Befehl f"ur den Solver; * ist Anzahl der Ergebnisse, kann auch entsprechend eine Zahl sein.
 [q] -> ist die logische Variable für die ein oder mehrere Werte gesucht wird
-(== 1 q) -> ist die Beschränkung für q.
-“Gib alle Werte für q zurück für die gilt: q == 1”
+(== 1 q) -> ist die Beschr"ankung für q.
+\dq{}Gib alle Werte für q zur"uck für die gilt: q == 1\dq{}
