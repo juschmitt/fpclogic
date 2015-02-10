@@ -1,23 +1,33 @@
 \section{Syntax}
 
+In diesem Kapitel soll die allgemeine Syntax von core.logic, die wichtigsten Funktionen und einige weiterführenden Funktionen vorgestellt werden. Weiterhin werden tiefergreifende Features vorgestellt und erklärt.
+
 \subsection{Allgemeines}
 
+Wie bereits in dem vorhergehenden Kapitel an einigen Beispielen zu sehen war, hat core.logic eine signifikante Syntax.
+\begin{lstlisting}
+(run * [logic-variables] (logic-expressions in conjunction))
+\end{lstlisting}
+Dieser Ausdruck liest sich wie folgt: ''Nimm die logischen Ausdrücke, lass den Solver diese lösen und gib alle Werte der logischen Variblen zurück die diese Ausdrücke erfüllen.''\\
+
+Um nicht bei jedem Aufruf der \code{run} Funktion alle Werte der logischen Variable zu bekommen, sondern nur endlich viele, kann man den * nach \code{run} durch eine Zahl ersetzen die der Anzahl der Werte entspricht die zurück gegeben werden sollen.
 
 
 \subsection{Wichtige Funktionen}
 
 core.logic basiert, "ahnlich wie miniKanren, auf 3 grundlegenden Funktionen.
-
-fresh:
+\begin{description}
+\item{\code{fresh}:}
 Mit fresh lassen sich beliebig viele neue logische Variablen ins Programm einf"uhren. Variablen die durch fresh eingef"uhrt wurden, sind auch nur innerhalb von diesem g"ultig, d.h. lvars innerhalb von fresh m"ussen auf eine au\ss{}erhalb von fresh g"ultige lvar "ubertragen werden.
 
-unify:
+\item{\code{unify}:}
 unify setzt lvars gleich. Entweder zu anderen lvars oder zu Werten. Mit unify lassen sich so zB lvars innerhalb von fresh auf eine lvar au\ss{}erhalb von fresh "ubetragen.
 
-conde:
-Mit conde ("ahnlich zu cond aus dem clojure.core Paket) lassen sich Constraints so gesagt \dq{}verodern\dq{}. Das heiss{}t es erzeugt eine logische Disjunktion von Constraints.
+\item{\code{conde}:}
+Mit conde ("ahnlich zu cond aus dem clojure.core Paket) lassen sich Constraints so gesagt \dq{}verodern\dq{}. Das heißt es erzeugt eine logische Disjunktion von Constraints.
+\end{description}
 
-Beispiel:
+Beispiel für \code{conde}:
 \begin{lstlisting}
 (run* [q]
     (conde
