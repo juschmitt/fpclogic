@@ -10,7 +10,7 @@ miniKanren in einem Satz: Wenn miniKanren ein Ausdruck und eine gew"unschte Ausg
 
 \subsubsection{Logische Ausdr"ucke}
 
-Ein logischer Ausdruck ist also eine Anweisung für den Solver und besteht aus den folgenden Teilen:
+Ein logischer Ausdruck ist also eine Anweisung f"ur den Solver und besteht aus den folgenden Teilen:
 \begin{itemize}
 
 \item eine Menge von logischen Variablen
@@ -23,12 +23,13 @@ Je nach Ausdruck, ist die Anzahl der logischen Variablen, die diese Einf"uhren u
 
 
 \subsection{Logische Variablen}
-Logische Variablen sind Container für einen nicht eindeutigen Wert. Das heiss{}t, dass eine logische Variable mehrere Werte nacheinander annehmen kann, um diese auszugeben oder weiterzugeben.
+Logische Variablen sind Container f"ur einen nicht eindeutigen Wert. Das heiss{}t, dass eine logische Variable mehrere Werte nacheinander annehmen kann, um diese auszugeben oder weiterzugeben.
 %//Wie sind die logischen Variablen implementiert? [...]
-Logische Variablen k"onnen spezielle Werte haben, zum Beispiel \_0 
+Logische Variablen k"onnen spezielle Werte haben, zum Beispiel \_0
+ 
 Tafelbild: (run* [q] (== q q)) ; R"uckgabe --> \_0
 In diesem Fall wird \_0 zur"uckgegeben, was so viel bedeutet wie: q kann jeden beliebigen Wert annehmen und erf"ullt immer die Beschr"ankung.
-F"ur den Fall, dass wir mehrere logische Variablen haben (zB 2) und beide k"onnen jeden beliebigen Wert annehmen, m"üssen aber gleich sein ist die R"uckgabe (\_0 \_0) k"onnen beide distinkt voneinander sein: (\_0 \_1).
+F"ur den Fall, dass wir mehrere logische Variablen haben (z.B. 2) und beide k"onnen jeden beliebigen Wert annehmen, m"ussen aber gleich sein ist die R"uckgabe (\_0 \_0), k"onnen beide distinkt voneinander sein: (\_0 \_1).
 Logische Variablen werden auf 2 Arten in ein logisches Programm eingef"uhrt:
 (run* [q] ...
 (fresh [...] ...)
@@ -47,7 +48,9 @@ Beschr"ankungen oder auch Constraints sind Ausdr"ucke die die Werte die eine log
 
 Hier muss ein Wert alle 3 Constraints erf"ullen, um als Wert von q angenommen werden zu k"onnen.
 \begin{lstlisting}
-Beispiel aus der Pr"asentation
+(run* [q]
+  (membero q [1 2 3])
+  (membero q [2 3 4]))
 \end{lstlisting}
 
 Im Beispiel muss ein Wert in den beiden Mengen [1 2 3] und [2 3 4] beinhaltet sein, um von q als Wert angenommen zu werden. Ergebnis w"are hier [2 3] .

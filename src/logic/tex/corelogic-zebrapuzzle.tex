@@ -1,12 +1,15 @@
 \section{Einstein-Test oder Zebrapuzzle}
 
-Bei diesem R"atsel geht es darum, aus einer Menge von 5 Personen, die sich alles jeweils durch die Farbe ihres Hauses, ihr Getr"ank, Haustier, ihre Zigarettenmarke und ihrer Nationalit"at unterscheiden, mithilfe von unvollst"andiger Informationen und einem logischen L"osungsansatz, genau eine Person mit einer gewissen Eigenschaft herauszufinden. N"aheres z.B. auf Wikipedia.
+Bei diesem R"atsel geht es darum, aus einer Menge von 5 Personen, die sich alle jeweils durch die Farbe ihres Hauses, ihr Getr"ank, irh Haustier, ihre Zigarettenmarke und ihre Nationalit"at unterscheiden, mithilfe von gegebenen Informationen und einem logischen L"osungsansatz, genau eine Person mit einer gewissen Eigenschaft herauszufinden. N"aheres z.B. auf Wikipedia.
 
 \subsection{Code}
 
 Das entsprechendes Codebeispiel kann auf folgender Seite \url{https://github.com/swannodette/logic-tutorial#zebras} gefunden werden.
 
-Die Methode \code{righto}
+
+Nachfolgend werden die im Codebeispiel definierten Methoden erklärt.
+
+\subsubsection{righto}
 
 \begin{lstlisting}
 (defne righto [x y l]
@@ -14,9 +17,9 @@ Die Methode \code{righto}
   ([_ _ [_ . ?r]] (righto x y ?r)))
 \end{lstlisting}
 
-erzeugt Pr"adikate um alle Permutationen eines Objekts zu bekommen, wenn es sich auf der rechten Seite befindet. Ein rekursiver Aufruf sorgt f"ur die Ausgabe aller geforderten Pr"adikate.
+Diese Methode erzeugt alle Beschränkungen, die wir benötigen damit \dq{}y\dq{} rechts von \dq{}x\dq{} steht. Ein rekursiver Aufruf sorgt st"oss{}t den Prozess sooft wieder an bis der Rest, dargstellt durch das \code{?r} behandelt wurde. Genauer werden also die Constraints zurückgegeben, oder auch Goals, die der Solver benötigt um unser Ergebnis zu errechnen.
 
-Die Methode \code{nexto}
+\subsubsection{nexto}
 
 \begin{lstlisting}
 (defn nexto [x y 1]
@@ -25,9 +28,9 @@ Die Methode \code{nexto}
     ((righto y x 1))))
 \end{lstlisting}
 
-erzeugt Pr"adikate um alle Permutationen eines Objektes zu bekommen, wenn es sich daneben befindet.
+Diese Methode erzeugt Pr"adikate um alle Permutationen eines Objektes zu bekommen, wenn es sich daneben befindet. Auch hier reden wir bei der Rückgabe wieder von Constraints/Goals.
 
-Die Methode \code{zebrao}
+\subsubsection{zebrao}
 
 \begin{lstlisting}
 (defn zebrao [hs]
@@ -49,5 +52,11 @@ Die Methode \code{zebrao}
      (nexto [_ _ _ 'fox _] [_ 'chesterfields _ _ _] hs))))
 \end{lstlisting}
 
-enth"alt s"amtliche Regeln in Pr"adikatenform. Die erste Zeile enth"alt z.B. zwei Regeln. Einmal die Regel, das es f"unf H"auser gibt und die Regel, das die Person im mittleren Haus trinkt Milch trinkt. Die zweite Regel sagt aus, das die Person ganz links (firsto, "der Erste") norwegisch ist. Die Dritte, das neben der norwegischen Person ein blaues Haus steht und so weiter.
-Im Programmcode werden in der zweiten Zeile die Zeichen \dq{}lvar\dq{} an das Symbol \dq{}\_\dq{} gebunden. Das erspart einige Zeichen Code und erhöt die Lesbarkeit.
+Die f"unf H"auser mit jeweils einer Person und deren f"unf verschiedene Eigenschaften, werden intern durch eine Matrix dargestellt. Ein Vektor der gr"oss{}e f"ünf f"ur die Darstellung der H"auser, und jeweils für jedes Haus ein Vektor der Gr"oss{}e f"unf. Ein \dq{}Haus-Vektor\dq{} hat dabei folgende Bedeutung:
+
+\begin{lstlisting}
+["Nationalität" "Zigarettenmarke" "Getränk" "Haustier" "Hausfarbe"]
+\end{lstlisting}
+
+Diese Methode enth"alt s"amtliche Regeln des Puzzles. Durch die Wahl von sprechenden Namen, der verwendeten und selbst definierten Methoden, sind die Regeln sehr gut abzulesen. Die erste Zeile enth"alt z.B. zwei Regeln. Einmal die Regel, das es f"unf H"auser gibt und die Regel, das die Person im mittleren Haus trinkt Milch trinkt. Die zweite Regel sagt aus, das die Person ganz links (firsto, "der Erste") norwegisch ist. Die Dritte, das neben der norwegischen Person ein blaues Haus steht und so weiter.
+Im Programmcode werden in der zweiten Zeile die Zeichen \dq{}lvar\dq{} an das Symbol \dq{}\_\dq{} gebunden. Das erspart einige Zeichen Code und erh"oht die Lesbarkeit.
