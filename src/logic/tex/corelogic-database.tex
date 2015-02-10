@@ -1,10 +1,10 @@
-\section{Beispiel Datenbanken}
+\section{Weitere Features von core.logic}
 
-\subsection{Hintergrund}
+\subsection{Datenbanken}
 
 Bei der funktionalen Programmierung und/oder auch der Relationalen, bietet es sich an, über eine Faktenbasis und deren verschiedenen Relationen eine Art Datenbank zu erstellen um dort Informationen abfragen zu können. Mit core.logic ist so etwas relativ schnell und komfortabel mit dem Unterpacket von core.logic, core.logic.pldb möglich.
 
-\subsection{Model}
+\subsubsection{Model}
 
 Unser Model ist eine gewöhnliche italienische Familie. Dort exisiteren Väter, Mütter und Kinder. Ein Vater hat ein Kind und eine Mutter hat ein Kind. Das sind dann auch unsere Relationen.
 
@@ -14,7 +14,7 @@ Relation V : X ist Vater von Y
 Relation M : X ist Mutter von Y
 \end{lstlisting}
 
-\subsection{Code}
+\subsubsection{Code}
 
 Die Packete \code{core.logic} und hauptsächlich \code{core.logic.pldb} mit folgendem Befehl bekannt machen, dabei aber das \code{==} vom clojure.core nicht berücksichtigen.
 
