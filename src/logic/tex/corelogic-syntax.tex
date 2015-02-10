@@ -1,8 +1,8 @@
-\section{Syntax}
+\subsection{Syntax}
 
 In diesem Kapitel soll die allgemeine Syntax von core.logic, die wichtigsten Funktionen und einige weiterführenden Funktionen vorgestellt werden. Weiterhin werden tiefergreifende Features vorgestellt und erklärt.
 
-\subsection{Allgemeines}
+\subsubsection{Allgemeine Syntax}
 
 Wie bereits in dem vorhergehenden Kapitel an einigen Beispielen zu sehen war, hat core.logic eine signifikante Syntax.
 \begin{lstlisting}
@@ -12,7 +12,7 @@ Dieser Ausdruck liest sich wie folgt: ''Nimm die logischen Ausdrücke, lass den 
 
 Um nicht bei jedem Aufruf der \code{run} Funktion alle Werte der logischen Variable zu bekommen, sondern nur endlich viele, kann man den * nach \code{run} durch eine Zahl ersetzen die der Anzahl der Werte entspricht die zurück gegeben werden sollen.
 
-\subsection{Wichtige Funktionen}
+\subsubsection{Die wichtigsten Funktionen}
 
 core.logic basiert, "ahnlich wie miniKanren, auf 3 grundlegenden Funktionen.
 \begin{description}
@@ -59,7 +59,7 @@ Ein nachgestelltes
 
 \end{itemize}
 
-\subsection{Aufruf der Instanz eines L"osungsautomaten oder auch Solver}
+\subsubsection{Aufruf des Solvers}
 
 Einfaches Beispiel:
 
@@ -80,7 +80,7 @@ Das ist die Beschränkung auf die logische Variable. q wird hier mit 1 unifizier
 
 Werden mehrere Beschränkungen definiert, macht es für den Solver keinen Unterschied in welcher Reihenfolge diese stehen. 
 
-\subsection{Höhere Funktionen}
+\subsubsection{Höhere Funktionen}
 
 Neben den Funktionen \code{unify (==), fresh und conde} verfügt das Paket core.logic um einige weitere Funktionen die auf diesen 3 grundlegenden Funktionen aufbauen.
 

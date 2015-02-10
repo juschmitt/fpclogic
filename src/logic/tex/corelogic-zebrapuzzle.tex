@@ -1,15 +1,15 @@
-\section{Einstein-Test oder Zebrapuzzle}
+\subsection{Einstein-Test oder Zebrapuzzle}
 
-\subsection{Hintergrund}
+\subsubsection{Hintergrund}
 
 Bei diesem Rätsel geht es darum, aus einer Menge von 5 Personen, die sich alle jeweils durch die Farbe ihres Hauses, ihr Getränk, ihr Haustier, ihre Zigarettenmarke und ihre Nationalität unterscheiden, mithilfe von gegebenen Informationen und einem logischen Lösungsansatz, genau eine Person mit einer gewissen Eigenschaft herauszufinden. Näheres hierzu z.B. auf Wikipedia.
 
-\subsection{Code}
+\subsubsection{Code}
 
 Das entsprechendes Codebeispiel kann auf folgender Seite \url{https://github.com/swannodette/logic-tutorial#zebras} gefunden werden. 
 Nachfolgend werden die im Codebeispiel definierten Methoden erklärt.
 
-\subsubsection{righto}
+\subsubsubsection{righto}
 
 \begin{lstlisting}
 (defne righto [x y l]
@@ -19,7 +19,7 @@ Nachfolgend werden die im Codebeispiel definierten Methoden erklärt.
 
 Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{} rechts von \dq{}x\dq{} steht. Ein rekursiver Aufruf sorgt stößt den Prozess sooft wieder an bis der Rest, dargstellt durch das \code{?r} behandelt wurde. Genauer werden also die Constraints zurückgegeben, oder auch Goals, die der Solver benötigt um unser Ergebnis zu errechnen.
 
-\subsubsection{nexto}
+\subsubsubsection{nexto}
 
 \begin{lstlisting}
 (defn nexto [x y 1]
@@ -30,7 +30,7 @@ Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{
 
 Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{} links oder rechts neben \dq{}x\dq{} steht. Dazu wird die oben erklärte Methode \code{righto} verwendet.
 \\
-\subsubsection{zebrao}
+\subsubsubsection{zebrao}
 
 \begin{lstlisting}
 (defn zebrao [hs]
@@ -59,7 +59,7 @@ Die fünf Häuser mit jeweils einer Person und deren fünf verschiedene Eigensch
 \\
 \code{['Nationalität' 'Zigarettenmarke' 'Getränk' 'Haustier' 'Hausfarbe']}\\
 
-\subsection{Lösung des Rätsels}
+\subsubsection{Lösung des Rätsels}
 
 Nach der Ausführung, und damit der Definition der obigen Codezeilen, führt man folgenden Code aus.
 
