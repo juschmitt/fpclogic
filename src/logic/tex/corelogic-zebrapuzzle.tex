@@ -19,13 +19,7 @@ Nachfolgend werden die im Codebeispiel definierten Methoden erkl"art.
   ([_ _ [_ . ?r]] (righto x y ?r)))
 \end{lstlisting}
 
-<<<<<<< HEAD
 Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{} rechts von \dq{}x\dq{} steht. Ein rekursiver Aufruf sorgt stößt den Prozess sooft wieder an bis der Rest, dargstellt durch das \code{?r} behandelt wurde. Genauer werden also die Constraints zurückgegeben, oder auch Goals, die der Solver benötigt um unser Ergebnis zu errechnen.
-=======
-Diese Methode erzeugt alle Beschr"ankungen, die wir ben"otigen damit \dq{}y\dq{} rechts von \dq{}x\dq{} steht. Ein rekursiver Aufruf sorgt st"o\ss{}t den Prozess so oft wieder an bis der Rest, dargstellt durch das \code{?r} behandelt wurde. Genauer werden also die Constraints zur"uckgegeben, oder auch Goals, die der Solver ben"otigt um unser Ergebnis zu errechnen.
->>>>>>> 95067ba59ae4611670278e88a0e82999884c7f34
-
-\subsubsection{nexto}
 
 \begin{lstlisting}
 (defn nexto [x y 1]
@@ -34,12 +28,8 @@ Diese Methode erzeugt alle Beschr"ankungen, die wir ben"otigen damit \dq{}y\dq{}
     ((righto y x 1))))
 \end{lstlisting}
 
-<<<<<<< HEAD
 Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{} links oder rechts neben \dq{}x\dq{} steht. Dazu wird die oben erklärte Methode \code{righto} verwendet.
-=======
-Diese Methode erzeugt Pr"adikate um alle Permutationen eines Objektes zu bekommen, wenn es sich daneben befindet. Auch hier reden wir bei der R"uckgabe wieder von Constraints/Goals.
->>>>>>> 95067ba59ae4611670278e88a0e82999884c7f34
-
+\\
 \subsubsection{zebrao}
 
 \begin{lstlisting}
@@ -62,14 +52,12 @@ Diese Methode erzeugt Pr"adikate um alle Permutationen eines Objektes zu bekomme
      (nexto [_ _ _ 'fox _] [_ 'chesterfields _ _ _] hs))))
 \end{lstlisting}
 
-<<<<<<< HEAD
 Diese Methode enth"alt s"amtliche Regeln des Puzzles. Durch die Wahl von sprechenden Namen, der verwendeten und selbst definierten Methoden, sind die Regeln sehr gut abzulesen. Die erste Zeile enth"alt z.B. zwei Regeln. Einmal die Regel, das es f"unf H"auser gibt und die Regel, das die Person im mittleren Haus trinkt Milch trinkt. Die zweite Regel sagt aus, das die Person ganz links (firsto, "der Erste") norwegisch ist. Die Dritte, das neben der norwegischen Person ein blaues Haus steht und so weiter.
 Im Programmcode werden in der zweiten Zeile die Zeichen \dq{}lvar\dq{} an das Symbol \dq{}\_\dq{} gebunden. Das erspart einige Zeichen Code und erh"oht die Lesbarkeit. 
 Die fünf Häuser mit jeweils einer Person und deren fünf verschiedene Eigenschaften, werden intern durch eine 5x5 Matrix dargestellt. Ein Vektor der größe fünf für die Darstellung der Häuser, und jeweils für jedes Haus bzw. die Person und deren Eigenschaften ein Vektor der Größe fünf. Ein \dq{}Haus-Vektor\dq{} hat dabei folgende Bedeutung:
-
-\begin{lstlisting}
-["Nationalität" "Zigarettenmarke" "Getränk" "Haustier" "Hausfarbe"]
-\end{lstlisting}
+\\
+\\
+\code{['Nationalität' 'Zigarettenmarke' 'Getränk' 'Haustier' 'Hausfarbe']}\\
 
 \subsection{Lösung des Rätsels}
 
@@ -81,13 +69,3 @@ Die fünf Häuser mit jeweils einer Person und deren fünf verschiedene Eigensch
     [spaniard lucky-strikes oj dog ivory]
     [japanese parliaments coffee _.1 green]])
 \end{lstlisting}
-=======
-Die f"unf H"auser mit jeweils einer Person und deren f"unf verschiedene Eigenschaften, werden intern durch eine Matrix dargestellt. Ein Vektor der Gr"o\ss{}e f"unf f"ur die Darstellung der H"auser, und jeweils f"ur jedes Haus ein Vektor der Gr"o\ss{}e f"unf. Ein \dq{}Haus-Vektor\dq{} hat dabei folgende Bedeutung:
-\\
-\\
-\code{['Nationalit"at' 'Zigarettenmarke' 'Getr\"ank' 'Haustier' 'Hausfarbe']}
-\\
-\\
-Diese Methode enth"alt s"amtliche Regeln des Puzzles. Durch die Wahl von sprechenden Namen, der verwendeten und selbst definierten Methoden, sind die Regeln sehr gut abzulesen. Die erste Zeile enth"alt z.B. zwei Regeln. Einmal die Regel, das es f"unf H"auser gibt und die Regel, das die Person im mittleren Haus trinkt Milch trinkt. Die zweite Regel sagt aus, das die Person ganz links (firsto, "der Erste") norwegisch ist. Die Dritte, das neben der norwegischen Person ein blaues Haus steht und so weiter.
-Im Programmcode werden in der zweiten Zeile die Zeichen \dq{}lvar\dq{} an das Symbol \dq{}\_\dq{} gebunden. Das erspart einige Zeichen Code und erh"oht die Lesbarkeit.
->>>>>>> 95067ba59ae4611670278e88a0e82999884c7f34
