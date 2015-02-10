@@ -6,7 +6,7 @@ core.logic ist eine Implementierung des auf Scheme basierenden Solvers: miniKanr
 
 Kanren ist Japanisch und bedeutet so viel wie Relation.
 
-miniKanren in einem Satz: Wenn miniKanren ein Ausdruck und eine gew"unschte Ausgabe gegeben wird, kann es dies \dq{} R"uckw"arts \dq{} ausf"uhren und findet dabei alle m"oglichen Eingaben zu dem Ausdruck der die gew"unschte Ausgabe erzeugt hat.
+miniKanren in einem Satz: Wenn miniKanren ein Ausdruck und eine gew"unschte Ausgabe gegeben wird, kann es dies \dq{}Rückw"arts\dq{} ausf"uhren und findet dabei alle m"oglichen Eingaben zu dem Ausdruck der die gew"unschte Ausgabe erzeugt hat.
 
 \subsubsection{Logische Ausdr"ucke}
 
@@ -19,21 +19,42 @@ Ein logischer Ausdruck ist also eine Anweisung f"ur den Solver und besteht aus d
 
 \end{itemize}
 
-Je nach Ausdruck, ist die Anzahl der logischen Variablen, die diese Einf"uhren unterschiedlich. (run ..) zum Beispiel, kann nur eine lvar einf"uhren.
-
 
 \subsection{Logische Variablen}
-Logische Variablen sind Container f"ur einen nicht eindeutigen Wert. Das heiss{}t, dass eine logische Variable mehrere Werte nacheinander annehmen kann, um diese auszugeben oder weiterzugeben.
+Logische Variablen sind Container f"ur einen nicht eindeutigen Wert. Das hei\ss{}t, dass eine logische Variable mehrere Werte nacheinander annehmen kann, um diese auszugeben oder weiterzugeben.
 %//Wie sind die logischen Variablen implementiert? [...]
-Logische Variablen k"onnen spezielle Werte haben, zum Beispiel \_0
- 
-Tafelbild: (run* [q] (== q q)) ; R"uckgabe --> \_0
-In diesem Fall wird \_0 zur"uckgegeben, was so viel bedeutet wie: q kann jeden beliebigen Wert annehmen und erf"ullt immer die Beschr"ankung.
-F"ur den Fall, dass wir mehrere logische Variablen haben (z.B. 2) und beide k"onnen jeden beliebigen Wert annehmen, m"ussen aber gleich sein ist die R"uckgabe (\_0 \_0), k"onnen beide distinkt voneinander sein: (\_0 \_1).
-Logische Variablen werden auf 2 Arten in ein logisches Programm eingef"uhrt:
-(run* [q] ...
-(fresh [...] ...)
-W"ahrend (run* ...) immer nur 1 logische Variable einf"uhren kann, f"uhrt (fresh ...) beliebig viele ein, muss aber innerhalb von einem (run* ...) Befehl stehen.
+Logische Variablen k"onnen spezielle Werte haben, zum Beispiel \_0. Dies soll darstellen, dass die entsprechende logische Variable jeden beliebigen Wert annehmen kann, um die Bedingungen zu erf"ullen.
+
+\begin{lstlisting}
+(run * [q r] (== q r))
+\end{lstlisting}
+\begin{flushleft}
+\code{Ausgabe: [\_0 \_0]}
+\end{flushleft}
+Diese Ausgabe bedeutet, dass beide logischen Variablen q und r jeden beliebigen Wert annehmen können, um die Bedingungen zu erfüllen, dabei müssen sie aber beide den gleichen Wert annehmen.
+
+\begin{lstlisting}
+(run * [q r] (== q q) (== r r))
+\end{lstlisting}
+\begin{flushleft}
+\code{Ausgabe: [\_0 \_1]}
+\end{flushleft}
+Bei dieser Anweisung können q und r auch jeden beliebigen Wert annehmen, dürfen dabei aber auch distinkt voneinander sein, um die Bedingungen zu erfüllen.\\
+
+
+In core.logic gibt es zwei Wege, um logische Variablen einzuführen:
+\begin{itemize}
+\item \code{(run * [\dots{}] \dots{})}
+\item \code{(fresh [\dots{}] \dots{})}
+\end{itemize}
+
+Da \code{(run * [])} einen logischen Ausdruck einleitet, muss hier auch immer mindestens 1 logische Variable eingeführt werden. Weiterhin sind alle logischen Variablen immer nur in dem Bereich und allen tieferen Bereichen verfügbar in denen sie eingeführt wurden.\\
+Beispiel:
+\begin{lstlisting}
+(run * [q] (fresh [x] (== x 1) (== x q)))
+\end{lstlisting}
+Da die logische Variable x durch \code{fresh} eingeführt wurde, kann diese nur innerhalb des \code{fresh}-Bereichs genutzt werden. Außerhalb der Klammern von \code{fresh} ist x nicht mehr gültig. Die logische Variable q wurde allerdings von  \code{run} eingeführt und ist daher auch innerhalb von \code{fresh} verfügbar und kann dort genutzt werden.
+
 
 \subsection{Beschr"ankungen}
 
@@ -53,5 +74,5 @@ Hier muss ein Wert alle 3 Constraints erf"ullen, um als Wert von q angenommen we
   (membero q [2 3 4]))
 \end{lstlisting}
 
-Im Beispiel muss ein Wert in den beiden Mengen [1 2 3] und [2 3 4] beinhaltet sein, um von q als Wert angenommen zu werden. Ergebnis w"are hier [2 3] .
+Im Beispiel muss ein Wert in den beiden Mengen \code{[1 2 3]} und \code{[2 3 4]} beinhaltet sein, um von q als Wert angenommen zu werden. Das Ergebnis w"are in diesem Beispiel: \code{[2 3]}.
 
