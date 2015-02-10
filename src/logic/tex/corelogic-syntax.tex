@@ -12,7 +12,6 @@ Dieser Ausdruck liest sich wie folgt: ''Nimm die logischen Ausdrücke, lass den 
 
 Um nicht bei jedem Aufruf der \code{run} Funktion alle Werte der logischen Variable zu bekommen, sondern nur endlich viele, kann man den * nach \code{run} durch eine Zahl ersetzen die der Anzahl der Werte entspricht die zurück gegeben werden sollen.
 
-
 \subsection{Wichtige Funktionen}
 
 core.logic basiert, "ahnlich wie miniKanren, auf 3 grundlegenden Funktionen.
@@ -62,13 +61,74 @@ Ein nachgestelltes
 
 \subsection{Aufruf der Instanz eines L"osungsautomaten oder auch Solver}
 
+Einfaches Beispiel:
+
 \begin{lstlisting}
-    (run* [logic-variable] &constraints)
+( run 1 [q] 
+	(== 1 q)
+)
 \end{lstlisting}
 
+\begin{description}
+\item{\code{run 1}:}
+Mit \code{run} wird der Solver gestartet und dieser soll das erste Ergebnis, das er bekommt, zurückgeben.
+\item{\code{[q]}:}
+Das ist die logische Variable für die der Solver Werte suchen soll.
+\item{\code{(== 1 q)}:}
+Das ist die Beschränkung auf die logische Variable. q wird hier mit 1 unifiziert und gibt damit vor, dass q = 1 sein muss damit diese Beschränkung erfüllt ist.
+\end{description}
 
-Tafelbild: (run* [q] (== 1 q) ) ; R"uckgabe --> 1
-(run* \dots{}) -> Befehl f"ur den Solver; * ist Anzahl der Ergebnisse, kann auch entsprechend eine Zahl sein.
-[q] -> ist die logische Variable für die ein oder mehrere Werte gesucht wird
-(== 1 q) -> ist die Beschr"ankung für q.
-\dq{}Gib alle Werte für q zur"uck für die gilt: q == 1\dq{}
+Werden mehrere Beschränkungen definiert, macht es für den Solver keinen Unterschied in welcher Reihenfolge diese stehen. 
+
+\subsection{Höhere Funktionen}
+
+Neben den Funktionen \code{unify (==), fresh und conde} verfügt das Paket core.logic um einige weitere Funktionen die auf diesen 3 grundlegenden Funktionen aufbauen.
+
+Dazu gehört zum Beispiel das bereits genannte \code{membero}:\\
+\code{(membero x M)} beschränkt die logische Variable (in diesem Fall x) so, dass diese ein Element der Menge M sein muss, damit die Beschränkung erfüllt ist.\\
+\begin{lstlisting}
+(run * [q]
+	(membero q [1 2 3])
+)
+\end{lstlisting}
+Dieses Beispiel würde die Ausgabe \code{(1, 2, 3)} zurückgeben, da q eine dieser 3 Zahlen annehmen kann, um ein Element der Menge \code{[1 2 3]} zu sein.
+
+\begin{lstlisting}
+(defne membero
+	[x l]
+	([_ [x . tail]])
+	([_ [head . tail]]
+	 (membero x tail)
+	)
+)
+\end{lstlisting}
+
+Die Definition von \code{membero} in core.logic. Diese besteht aus zwei Beschränkungen, \code{([\_ [x . tail]])} und \code{([\_ [head . tail]] (membero x tail))}. Während die erste Beschränkung erfüllt ist, wenn x das erste Element der Menge l ist, besagt die zweite, dass wenn x nicht das erste Element der Menge ist, dann ist x das erste Element der Menge tail (wobei tail die Menge l ohne deren erstes Element darstellt).
+
+Weitere höhere Funktionen sind:
+\begin{description}
+\item{\code{(resto l r)}:}
+\code{resto} schränkt die logische Variable so ein, dass r die Restmenge der Menge l ist. Das heißt r ist die Menge l ohne deren erstes Element.
+\begin{lstlisting}
+(run * [q]
+	(resto [1 2 3 4] q)
+)
+\end{lstlisting}
+q entspricht in diesem Beispiel der Menge (2 3 4).
+\item{\code{(conso x r s)}:}
+\code{conso} schränkt die logische Variable so ein, dass x das erste Element einer Menge, r der Rest dieser Menge und s genau diese Menge ist.
+
+\begin{lstlisting}
+(run * [q]
+	(conso 1 [2 3 4] q)
+)
+\end{lstlisting}
+q entspricht hier der Menge (1 2 3 4)
+
+\begin{lstlisting}
+(run * [q]
+	(conso q [2 3 4] [1 2 3 4])
+)
+\end{lstlisting}
+q entspricht hier 1
+\end{description}
