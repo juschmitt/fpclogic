@@ -1,6 +1,8 @@
 \section{Einstein-Test oder Zebrapuzzle}
 
-Bei diesem R"atsel geht es darum, aus einer Menge von 5 Personen, die sich alle jeweils durch die Farbe ihres Hauses, ihr Getr"ank, irh Haustier, ihre Zigarettenmarke und ihre Nationalit"at unterscheiden, mithilfe von gegebenen Informationen und einem logischen L"osungsansatz, genau eine Person mit einer gewissen Eigenschaft herauszufinden. N"aheres z.B. auf Wikipedia.
+\subsection{Hintergrund}
+
+Bei diesem Rätsel geht es darum, aus einer Menge von 5 Personen, die sich alle jeweils durch die Farbe ihres Hauses, ihr Getränk, ihr Haustier, ihre Zigarettenmarke und ihre Nationalität unterscheiden, mithilfe von gegebenen Informationen und einem logischen Lösungsansatz, genau eine Person mit einer gewissen Eigenschaft herauszufinden. Näheres hierzu z.B. auf Wikipedia.
 
 \subsection{Code}
 
@@ -17,7 +19,7 @@ Nachfolgend werden die im Codebeispiel definierten Methoden erklärt.
   ([_ _ [_ . ?r]] (righto x y ?r)))
 \end{lstlisting}
 
-Diese Methode erzeugt alle Beschränkungen, die wir benötigen damit \dq{}y\dq{} rechts von \dq{}x\dq{} steht. Ein rekursiver Aufruf sorgt st"oss{}t den Prozess sooft wieder an bis der Rest, dargstellt durch das \code{?r} behandelt wurde. Genauer werden also die Constraints zurückgegeben, oder auch Goals, die der Solver benötigt um unser Ergebnis zu errechnen.
+Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{} rechts von \dq{}x\dq{} steht. Ein rekursiver Aufruf sorgt stößt den Prozess sooft wieder an bis der Rest, dargstellt durch das \code{?r} behandelt wurde. Genauer werden also die Constraints zurückgegeben, oder auch Goals, die der Solver benötigt um unser Ergebnis zu errechnen.
 
 \subsubsection{nexto}
 
@@ -28,7 +30,7 @@ Diese Methode erzeugt alle Beschränkungen, die wir benötigen damit \dq{}y\dq{}
     ((righto y x 1))))
 \end{lstlisting}
 
-Diese Methode erzeugt Pr"adikate um alle Permutationen eines Objektes zu bekommen, wenn es sich daneben befindet. Auch hier reden wir bei der Rückgabe wieder von Constraints/Goals.
+Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{} links oder rechts neben \dq{}x\dq{} steht. Dazu wird die oben erklärte Methode \code{righto} verwendet.
 
 \subsubsection{zebrao}
 
@@ -52,11 +54,21 @@ Diese Methode erzeugt Pr"adikate um alle Permutationen eines Objektes zu bekomme
      (nexto [_ _ _ 'fox _] [_ 'chesterfields _ _ _] hs))))
 \end{lstlisting}
 
-Die f"unf H"auser mit jeweils einer Person und deren f"unf verschiedene Eigenschaften, werden intern durch eine Matrix dargestellt. Ein Vektor der gr"oss{}e f"ünf f"ur die Darstellung der H"auser, und jeweils für jedes Haus ein Vektor der Gr"oss{}e f"unf. Ein \dq{}Haus-Vektor\dq{} hat dabei folgende Bedeutung:
+Diese Methode enth"alt s"amtliche Regeln des Puzzles. Durch die Wahl von sprechenden Namen, der verwendeten und selbst definierten Methoden, sind die Regeln sehr gut abzulesen. Die erste Zeile enth"alt z.B. zwei Regeln. Einmal die Regel, das es f"unf H"auser gibt und die Regel, das die Person im mittleren Haus trinkt Milch trinkt. Die zweite Regel sagt aus, das die Person ganz links (firsto, "der Erste") norwegisch ist. Die Dritte, das neben der norwegischen Person ein blaues Haus steht und so weiter.
+Im Programmcode werden in der zweiten Zeile die Zeichen \dq{}lvar\dq{} an das Symbol \dq{}\_\dq{} gebunden. Das erspart einige Zeichen Code und erh"oht die Lesbarkeit. 
+Die fünf Häuser mit jeweils einer Person und deren fünf verschiedene Eigenschaften, werden intern durch eine 5x5 Matrix dargestellt. Ein Vektor der größe fünf für die Darstellung der Häuser, und jeweils für jedes Haus bzw. die Person und deren Eigenschaften ein Vektor der Größe fünf. Ein \dq{}Haus-Vektor\dq{} hat dabei folgende Bedeutung:
 
 \begin{lstlisting}
 ["Nationalität" "Zigarettenmarke" "Getränk" "Haustier" "Hausfarbe"]
 \end{lstlisting}
 
-Diese Methode enth"alt s"amtliche Regeln des Puzzles. Durch die Wahl von sprechenden Namen, der verwendeten und selbst definierten Methoden, sind die Regeln sehr gut abzulesen. Die erste Zeile enth"alt z.B. zwei Regeln. Einmal die Regel, das es f"unf H"auser gibt und die Regel, das die Person im mittleren Haus trinkt Milch trinkt. Die zweite Regel sagt aus, das die Person ganz links (firsto, "der Erste") norwegisch ist. Die Dritte, das neben der norwegischen Person ein blaues Haus steht und so weiter.
-Im Programmcode werden in der zweiten Zeile die Zeichen \dq{}lvar\dq{} an das Symbol \dq{}\_\dq{} gebunden. Das erspart einige Zeichen Code und erh"oht die Lesbarkeit.
+\subsection{Lösung des Rätsels}
+
+\begin{lstlisting}
+(run 1 [q] (zebrao q))
+  ([[norwegian kools _.0 fox yellow]
+    [ukrainian chesterfields tea horse blue]
+    [englishman oldgolds milk snails red]
+    [spaniard lucky-strikes oj dog ivory]
+    [japanese parliaments coffee _.1 green]])
+\end{lstlisting}
