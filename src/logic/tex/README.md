@@ -17,5 +17,5 @@
   4. Weitere Features von core.logic
     1. Datenbanken
     2. Constraint Logic Programming (CLP(Tree)&CLP(FD))
-4. Beispiel
-  1. Zebrapuzzle
+  5. Beispiel
+    1. Zebrapuzzle
