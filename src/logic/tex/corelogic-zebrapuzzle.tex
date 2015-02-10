@@ -9,7 +9,7 @@ Bei diesem Rätsel geht es darum, aus einer Menge von 5 Personen, die sich alle 
 Das entsprechendes Codebeispiel kann auf folgender Seite \url{https://github.com/swannodette/logic-tutorial#zebras} gefunden werden. 
 Nachfolgend werden die im Codebeispiel definierten Methoden erklärt.
 
-\subsubsubsection{righto}
+\subsubsection{righto}
 
 \begin{lstlisting}
 (defne righto [x y l]
@@ -19,7 +19,7 @@ Nachfolgend werden die im Codebeispiel definierten Methoden erklärt.
 
 Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{} rechts von \dq{}x\dq{} steht. Ein rekursiver Aufruf sorgt stößt den Prozess sooft wieder an bis der Rest, dargstellt durch das \code{?r} behandelt wurde. Genauer werden also die Constraints zurückgegeben, oder auch Goals, die der Solver benötigt um unser Ergebnis zu errechnen.
 
-\subsubsubsection{nexto}
+\subsubsection{nexto}
 
 \begin{lstlisting}
 (defn nexto [x y 1]
@@ -30,7 +30,7 @@ Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{
 
 Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{} links oder rechts neben \dq{}x\dq{} steht. Dazu wird die oben erklärte Methode \code{righto} verwendet.
 \\
-\subsubsubsection{zebrao}
+\subsubsection{zebrao}
 
 \begin{lstlisting}
 (defn zebrao [hs]
@@ -59,6 +59,12 @@ Die fünf Häuser mit jeweils einer Person und deren fünf verschiedene Eigensch
 \\
 \code{['Nationalität' 'Zigarettenmarke' 'Getränk' 'Haustier' 'Hausfarbe']}\\
 
+Somit existiert hier eine Relation \dq{}Person\dq{} und \dq{}Nachbarschaft\dq{}. Diese wären wie folgt definiert:
+\begin{lstlisting}
+Relation P : Ist A, hat  Keine ahnung, Spaeter 
+Relation N : P wohnt neben Q; Tupel: (P, Q)
+\end{lstlisting}
+
 \subsubsection{Lösung des Rätsels}
 
 Nach der Ausführung, und damit der Definition der obigen Codezeilen, führt man folgenden Code aus.
@@ -86,4 +92,4 @@ In diesem Fall kann man die Ausgangsfragen beantworten:
   \item Wer hat den Fisch?
 \end{enumerate}
 
-Die Ausgabe sagt aus, das wir in jedem Fall an beiden Stellen zwei voneinander verschiedene Ergebnisse haben. Somit wäre eine plausible Lösung in unserem Fall, das der Norweger Wasser trinkt und der Japaner einen Fisch hat (Kommt auf die Fragestellung an).
+Die Ausgabe sagt aus, das wir in jedem Fall an beiden Stellen zwei voneinander verschiedene Ergebnisse haben. Somit wäre eine plausible Lösung in unserem Fall, das der Norweger Wasser trinkt und der Japaner einen Fisch hat. Ob Fisch und Wasser oder andere Haustiere und Getränke gefragt sind, kommt natürlich auf die Fragestellung an.

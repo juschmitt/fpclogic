@@ -21,3 +21,4 @@ https://trello-attachments.s3.amazonaws.com/54c629961249457153f8f798/54d374620e6
  - https://github.com/clojure/core.logic
  - https://github.com/clojure/core.logic/wiki
  - https://github.com/swannodette/logic-tutorial
+ - http://cs.adelaide.edu.au/users/dwyer/TR95-10_TOC.html
