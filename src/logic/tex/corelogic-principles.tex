@@ -38,7 +38,6 @@ In core.logic gibt es zwei Wege, um logische Variablen einzuführen:
 \item \code{(run * [\dots{}] \dots{})}
 \item \code{(fresh [\dots{}] \dots{})}
 \end{itemize}
-
 Da \code{(run * [])} einen logischen Ausdruck einleitet, muss hier auch immer mindestens 1 logische Variable eingeführt werden. Weiterhin sind alle logischen Variablen immer nur in dem Bereich und allen tieferen Bereichen verfügbar in denen sie eingeführt wurden.\\
 Beispiel:
 \begin{lstlisting}
@@ -57,13 +56,10 @@ Beschr"ankungen oder auch Constraints sind Ausdr"ucke die die Werte die eine log
     (constraint-3)
 )
 \end{lstlisting}
-
 Hier muss ein Wert alle 3 Constraints erf"ullen, um als Wert von q angenommen werden zu k"onnen.
 \begin{lstlisting}
 (run* [q]
   (membero q [1 2 3])
   (membero q [2 3 4]))
 \end{lstlisting}
-
 Im Beispiel muss ein Wert in den beiden Mengen \code{[1 2 3]} und \code{[2 3 4]} beinhaltet sein, um von q als Wert angenommen zu werden. Das Ergebnis w"are in diesem Beispiel: \code{[2 3]}.
-
