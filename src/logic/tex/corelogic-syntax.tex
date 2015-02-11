@@ -92,7 +92,20 @@ Die Definition von \code{membero} in core.logic. Diese besteht aus zwei Beschrä
 Weitere höhere Funktionen sind:
 \begin{description}
 \item{\code{(resto l r)}:}
-\code{resto} schränkt die logische Variable so ein, dass r die Restmenge der Menge l ist. Das heißt r ist die Menge l ohne deren erstes Element.
+\code{resto} schränkt die logische Variable so ein, dass r die Restmenge der Menge l ist. Das heißt r ist die Menge l ohne deren erstes Element.\\
+\\
+Die Implementierung der Funktion \code{resto}:
+\begin{lstlisting}
+(defn resto 
+	[l d]
+	(fresh [a]
+	  (== (lcons a d) l))
+)
+\end{lstlisting}
+\code{resto} werden zwei Variablen übergeben: l und d - wobei l die Gesamtmenge und d die Restmenge darstellt. Weiterhin wird aber noch der Kopf der Menge benötigt, welche mit \code{fresh [a]} eingeführt wird.
+Die Funktion \code{(lcons a d)} macht nichts anderes als aus den beiden Variablen a und d eine ordentliche Menge zu erstellen, mit a als Kopf und d als Restmenge. Diese soll dann der Menge l entsprechen und wird daher mit dieser unifiziert.\\
+\\
+Beispiel zur Funktionsweise von \code{resto}:
 \begin{lstlisting}
 (run * [q]
 	(resto [1 2 3 4] q)
@@ -101,7 +114,15 @@ Weitere höhere Funktionen sind:
 q entspricht in diesem Beispiel der Menge (2 3 4).
 \item{\code{(conso x r s)}:}
 \code{conso} schränkt die logische Variable so ein, dass x das erste Element einer Menge, r der Rest dieser Menge und s genau diese Menge ist.
-
+\begin{lstlisting}
+(defn conso
+	[a d l]
+	(== (lcons a d) l)
+)
+\end{lstlisting}
+\code{conso} und \code{resto} arbeiten auf die gleiche Art und Weise, nur, dass \code{conso} drei Variablen übergeben bekommt (Kopf, Rest- und Gesamtmenge). \code{(lcons a d)} erstellt wieder aus Kopf und Restmenge eine komplette Menge, die dann mit der übergebenen Gesamtmenge unifiziert wird.\\
+\\
+Beispiele zur Funktionsweise von \code{conso}:
 \begin{lstlisting}
 (run * [q]
 	(conso 1 [2 3 4] q)
