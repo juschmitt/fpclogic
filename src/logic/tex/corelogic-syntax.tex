@@ -9,7 +9,7 @@ Wie bereits in dem vorhergehenden Kapitel an einigen Beispielen zu sehen war, ha
 (run * [logic-variables] (logic-expressions in conjunction))
 \end{lstlisting}
 Dieser Ausdruck liest sich wie folgt: ''Nimm die logischen Ausdrücke, lass den Solver diese lösen und gib alle Werte der logischen Variblen zurück die diese Ausdrücke erfüllen.''\\
-
+\\
 Um nicht bei jedem Aufruf der \code{run} Funktion alle Werte der logischen Variable zu bekommen, sondern nur endlich viele, kann man den * nach \code{run} durch eine Zahl ersetzen die der Anzahl der Werte entspricht die zurück gegeben werden sollen.
 
 \subsubsection{Die wichtigsten Funktionen}
@@ -25,7 +25,6 @@ unify setzt lvars gleich. Entweder zu anderen lvars oder zu Werten. Mit unify la
 \item{\code{conde}:}
 Mit conde ("ahnlich zu cond aus dem clojure.core Paket) lassen sich Constraints so gesagt \dq{}verodern\dq{}. Das heißt es erzeugt eine logische Disjunktion von Constraints.
 \end{description}
-
 Beispiel für \code{conde}:
 \begin{lstlisting}
 (run* [q]
@@ -44,7 +43,6 @@ Beispiel für \code{conde}:
 	  (unify s q))
 )
 \end{lstlisting}
-
 Das sind die 3 grundlegenden Funktionen von core.logic. Das gesamte Package beinhaltet aber nat"urlich noch viele mehr, Wie z.B. das eben gesehene (membero \dots{}). Alle weiteren Funktionen im Package bauen aber auf den 3 Basis Funktionen auf. H"ohere Funktionen, folgen einer bestimmten Namenskonvention, wie z.B. zu sehen bei conde und memebero, werden Funktionen in core.logic die schon im clojure.core existieren mit einem a, e, u oder o um diese von den regul"aren clojure Funktionen zu differenzieren und diese nicht zu "uberschreiben. Weiterhin stehen diese Suffixe oft auch für bestimmte Arten von Funktionen, sodass der Entiwckler auf den ersten Blick erkennen kann, wie diese Funktion in etwa arbeitet. Ansonsten bestehen diese Namenskonventionen hauptsächlich aus historischen Gründen.
 
 
@@ -57,7 +55,6 @@ Einfaches Beispiel:
 	(== 1 q)
 )
 \end{lstlisting}
-
 \begin{description}
 \item{\code{run 1}:}
 Mit \code{run} wird der Solver gestartet und dieser soll das erste Ergebnis, das er bekommt, zurückgeben.
@@ -66,7 +63,6 @@ Das ist die logische Variable für die der Solver Werte suchen soll.
 \item{\code{(== 1 q)}:}
 Das ist die Beschränkung auf die logische Variable. q wird hier mit 1 unifiziert und gibt damit vor, dass q = 1 sein muss damit diese Beschränkung erfüllt ist.
 \end{description}
-
 Werden mehrere Beschränkungen definiert, macht es für den Solver keinen Unterschied in welcher Reihenfolge diese stehen. 
 
 \subsubsection{Höhere Funktionen}
@@ -91,7 +87,6 @@ Dieses Beispiel würde die Ausgabe \code{(1, 2, 3)} zurückgeben, da q eine dies
 	)
 )
 \end{lstlisting}
-
 Die Definition von \code{membero} in core.logic. Diese besteht aus zwei Beschränkungen, \code{([\_ [x . tail]])} und \code{([\_ [head . tail]] (membero x tail))}. Während die erste Beschränkung erfüllt ist, wenn x das erste Element der Menge l ist, besagt die zweite, dass wenn x nicht das erste Element der Menge ist, dann ist x das erste Element der Menge tail (wobei tail die Menge l ohne deren erstes Element darstellt).
 
 Weitere höhere Funktionen sind:

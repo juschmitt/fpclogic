@@ -14,8 +14,7 @@ Nachfolgend werden die im Codebeispiel definierten Methoden erklärt.
   ([_ _ [x y . ?r]])
   ([_ _ [_ . ?r]] (righto x y ?r)))
 \end{lstlisting}
-
-Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{} rechts von \dq{}x\dq{} steht. Ein rekursiver Aufruf sorgt stößt den Prozess sooft wieder an bis der Rest, dargstellt durch das \code{?r} behandelt wurde. Genauer werden also die Constraints zurückgegeben, oder auch Goals, die der Solver benötigt um unser Ergebnis zu errechnen.
+Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{} rechts von \dq{}x\dq{} steht. Ein rekursiver Aufruf sorgt stößt den Prozess sooft wieder an bis der Rest, dargstellt durch das \code{?r} behandelt wurde. Genauer werden also die Constraints zurückgegeben, oder auch Goals, die der Solver benötigt um unser Ergebnis zu errechnen.\\
 
 \subsubsection{nexto}
 
@@ -25,7 +24,6 @@ Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{
     ((righto x y 1))
     ((righto y x 1))))
 \end{lstlisting}
-
 Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{} links oder rechts neben \dq{}x\dq{} steht. Dazu wird die oben erklärte Methode \code{righto} verwendet.
 \\
 \subsubsection{zebrao}
@@ -49,14 +47,13 @@ Diese Methode erzeugt alle Beschränkungen, die wir benötigen, damit \dq{}y\dq{
      (nexto [_ _ _ 'horse _] [_ 'kools _ _ _] hs)
      (nexto [_ _ _ 'fox _] [_ 'chesterfields _ _ _] hs))))
 \end{lstlisting}
-
 Diese Methode enthält sämtliche Regeln des Puzzles. Durch die Wahl von sprechenden Namen, der verwendeten und selbst definierten Methoden, sind die Regeln sehr gut abzulesen. Die erste Zeile enthält z.B. zwei Regeln. Einmal die Regel, das es fünf Häuser gibt und die Regel, das die Person im mittleren Haus trinkt Milch trinkt. Die zweite Regel sagt aus, das die Person ganz links (firsto, "der Erste") norwegisch ist. Die Dritte, das neben der norwegischen Person ein blaues Haus steht und so weiter.
 Im Programmcode werden in der zweiten Zeile die Zeichen \dq{}lvar\dq{} an das Symbol \dq{}\_\dq{} gebunden. Das erspart einige Zeichen Code und erhöht die Lesbarkeit. 
 Die fünf Häuser mit jeweils einer Person und deren fünf verschiedene Eigenschaften, werden intern durch eine 5x5 Matrix dargestellt. Ein Vektor der größe fünf für die Darstellung der Häuser, und jeweils für jedes Haus bzw. die Person und deren Eigenschaften ein Vektor der Größe fünf. Ein \dq{}Haus-Vektor\dq{} hat dabei folgende Bedeutung:
 \\
 \\
 \code{['Nationalität' 'Zigarettenmarke' 'Getränk' 'Haustier' 'Hausfarbe']}\\
-
+\\
 Somit existiert hier eine Relation \dq{}Person\dq{} und \dq{}Nachbarschaft\dq{}. Diese wären wie folgt definiert:
 \begin{lstlisting}
 Relation P : Ist A, hat  Keine ahnung, Spaeter 
@@ -70,9 +67,9 @@ Nach der Ausführung, und damit der Definition der obigen Codezeilen, führt man
 \begin{lstlisting}
 (run 1 [q] (zebrao q))
 \end{lstlisting}
-
 Damit führen wir unsere Lösungsmaschine, mit den durch \code{zebrao} erstellten Constraints aus und lassen uns durch die Angabe des Arguments \dq{}1\dq{} die Erste Lösung zurückgeben.
-
+\\
+\\
 Ausgabe der Lösung:
 
 \begin{lstlisting}
@@ -82,12 +79,10 @@ Ausgabe der Lösung:
     [spaniard lucky-strikes oj dog ivory]
     [japanese parliaments coffee _.1 green]])
 \end{lstlisting}
-
 In diesem Fall kann man die Ausgangsfragen beantworten:
 
 \begin{enumerate}
   \item Wer trinkt Wasser?
   \item Wer hat den Fisch?
 \end{enumerate}
-
 Die Ausgabe sagt aus, das wir in jedem Fall an beiden Stellen zwei voneinander verschiedene Ergebnisse haben. Somit wäre eine plausible Lösung in unserem Fall, das der Norweger Wasser trinkt und der Japaner einen Fisch hat. Ob Fisch und Wasser oder andere Haustiere und Getränke gefragt sind, kommt natürlich auf die Fragestellung an.
