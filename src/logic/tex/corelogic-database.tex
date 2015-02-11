@@ -24,14 +24,12 @@ Die Packete \code{core.logic} und hauptsächlich \code{core.logic.pldb} mit folg
 	(:use [clojure.core.logic])
   	(:use [clojure.core.logic.pldb]))
 \end{lstlisting}
-
 Definieren der oben formulierten Relationen im Programm. Hierbei werden diese an ein Symbol und damit an ein Objekt im Speicher gebunden.
 
 \begin{lstlisting}
 (db-rel father Father Child)
 (db-rel mother Mother Child)
 \end{lstlisting}
-
 Die oben programmintern gebundenen Relationen können jetzt verwendet werden um mit \code{db} eine Repräsentation im Speicher zu erzeugen und diese wieder an Symbole zu binden. Dabei bekommt \code{db} eine Anzahl von Vektoren, die am Anfang ein Relations-Objekt (\dq{}Instanz\dq{} von db-rel) stehen haben und danach Argumente von der Größe des Tupel der Relation folgen um die Relation und des Tupel darzustellen.
 
 \begin{lstlisting}
@@ -56,7 +54,6 @@ Die oben programmintern gebundenen Relationen können jetzt verwendet werden um 
              [mother 'Sandra 'Frank]
              [mother 'Sandra 'Santino]))
 \end{lstlisting}
-
 Der Zugriff auf die Tabellen unseres realtionalen Datenbankmodels erfolgt über \code{with-db} auf eine Datenbank und über \code{with-dbs} auf einen Vektor von Datenbanken. Der Aufruf des Solvers erfolgt nach altbekanntem Muster. Die Benutzung von code{conde} bietet sich in diesem Fall an, da wir so mehrere Filter verodern können. In diesem Fall entspricht das einem SQL-ähnlichen \code{JOIN} auf das Kind q.
 
 \begin{lstlisting}
@@ -66,14 +63,12 @@ Der Zugriff auf die Tabellen unseres realtionalen Datenbankmodels erfolgt über 
 	(run* [q] 
 		(conde ((father p q)) ((mother p q))))))
 \end{lstlisting}
-
 Somit bekommen wir mit folgendem Code folgende Ausgabe:
 
 \begin{lstlisting}
 (children 'Vito)
 ; => (Michael Sonny Fredo)
 \end{lstlisting}
-
 Dabei funktioniert nur das Symbol \code{'Vito} und nicht der String \code{"Vito"}
 
 \begin{lstlisting}
@@ -90,7 +85,6 @@ Ein ähnliches Vorgehen für die Ermittlung der Eltern eines Kindes \dq{}c\dq{}.
 	(run* [q] 
 		(conde ((father q c)) ((mother q c))))))
 \end{lstlisting}
-
 Wird nichts gefunden bekommen wir eine Leere Menge.
 
 \begin{lstlisting}
@@ -100,7 +94,6 @@ Wird nichts gefunden bekommen wir eine Leere Menge.
 (parentse 'Anthony)
 ; => (Michael Kay)
 \end{lstlisting}
-
 Das Ermitteln des Vaters bzw. der Mutter ist sehr ähnlich. Und nur deshalb nur der Vollständigkeit halber erwähnenswert.
 
 \begin{lstlisting}
@@ -114,7 +107,7 @@ Das Ermitteln des Vaters bzw. der Mutter ist sehr ähnlich. Und nur deshalb nur 
   "Returns the mother of c"
   (with-db dbm (run* [q] (mother  q c))))
 \end{lstlisting}
-
+\noindent
 Bei der Ermittlung der Großenkel eines Großvaters wird es schon etwas komplizierter. Wir möchten alle Enkel in der Abfrage erwischen, das sind anders gesagt, die Kinder der Kinder. Genauer: Wir legen uns per \code{fresh} zwei neue logische Variablen \code{x} und \code{y} an. Unser gegebenes \code{g} ist der Großvater und damit der Anfang unserer \dq{}verschlungenen\dq{} Relationenkette. Jedes q aus der Menge aller Kinder der \code{dbf} Tabelle, welches einen Vater \code{x} hat, welcher \code{g} seinen Vater nennt, wird in die Lösungsmenge aufgenommen. In PostgreSQL wäre so etwas mit \code{RECURSIVE} möglich oder auch mit einem \code{JOIN} auf einer Tabelle.
 
 \begin{lstlisting}
@@ -122,7 +115,7 @@ Bei der Ermittlung der Großenkel eines Großvaters wird es schon etwas komplizi
   "Returns the grandchild(s) of g"
   (with-dbs [dbf] (run* [q] (fresh [x y] (father g x) (father x y) (== q y)))))
 \end{lstlisting}
-
+\noindent
 Damit bekommen wir mit der Eingabe \code{'Vito}, alle Enkel von ihm.
 
 \begin{lstlisting}
