@@ -1,12 +1,12 @@
 
 \subsubsection{Logische Ausdr"ucke}
 
-Ein logischer Ausdruck ist also eine Anweisung f"ur den Solver und besteht aus den folgenden Teilen:
+Ein logischer Ausdruck ist also eine Anweisung für den Solver und besteht aus den folgenden Teilen:
 \begin{itemize}
 
 \item eine Menge von logischen Variablen
 
-\item eine Menge von Beschr"ankungen auf die Werte, die die logischen Variablen annehmen k"onnen
+\item eine Menge von Beschr"ankungen auf die Werte, die die logischen Variablen annehmen können
 
 \end{itemize}
 
@@ -46,9 +46,9 @@ Beispiel:
 Da die logische Variable x durch \code{fresh} eingeführt wurde, kann diese nur innerhalb des \code{fresh}-Bereichs genutzt werden. Außerhalb der Klammern von \code{fresh} ist x nicht mehr gültig. Die logische Variable q wurde allerdings von  \code{run} eingeführt und ist daher auch innerhalb von \code{fresh} verfügbar und kann dort genutzt werden.
 
 
-\subsubsection{Beschr"ankungen}
+\subsubsection{Beschränkungen}
 
-Beschr"ankungen oder auch Constraints sind Ausdr"ucke die die Werte die eine logische Variable annehmen kann, beschr"anken. Es k"onnen mehrere Beschr"ankungen existieren die untereinander in einer Konjunktion stehen:
+Beschr"ankungen oder auch Constraints sind Ausdrücke die die Werte die eine logische Variable annehmen kann, beschr"anken. Es k"onnen mehrere Beschr"ankungen existieren die untereinander in einer Konjunktion stehen:
 \begin{lstlisting}
 (run* [q]
     (constraint-1)
