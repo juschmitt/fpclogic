@@ -43,7 +43,21 @@ Beispiel für \code{conde}:
 	  (unify s q))
 )
 \end{lstlisting}
-Das sind die 3 grundlegenden Funktionen von core.logic. Das gesamte Package beinhaltet aber nat"urlich noch viele mehr, Wie z.B. das eben gesehene (membero \dots{}). Alle weiteren Funktionen im Package bauen aber auf den 3 Basis Funktionen auf. H"ohere Funktionen, folgen einer bestimmten Namenskonvention, wie z.B. zu sehen bei conde und memebero, werden Funktionen in core.logic die schon im clojure.core existieren mit einem a, e, u oder o um diese von den regul"aren clojure Funktionen zu differenzieren und diese nicht zu "uberschreiben. Weiterhin stehen diese Suffixe oft auch für bestimmte Arten von Funktionen, sodass der Entiwckler auf den ersten Blick erkennen kann, wie diese Funktion in etwa arbeitet. Ansonsten bestehen diese Namenskonventionen hauptsächlich aus historischen Gründen.
+Das sind die 3 grundlegenden Funktionen von core.logic. Das gesamte Package beinhaltet aber nat"urlich noch viele mehr, Wie z.B. das eben gesehene (membero \dots{}). Alle weiteren Funktionen im Package bauen aber auf den 3 Basis Funktionen auf. Höhere Funktionen folgen einer bestimmten Namenskonvention, zu sehen z.B. bei conde und memebero. Hiermit werden Funktionen in core.logic die schon im clojure.core existieren mit einem a, e, u oder o \dq{}verlängert\dq{}, um diese von den regulären clojure Funktionen zu differenzieren und diese nicht zu überschreiben. Aber stehen diese Suffixe oft auch für ein bestimmtes Verhalten von Funktionen, sodass der Entiwckler auf den ersten Blick erkennen kann, wie diese Funktion in etwa arbeitet. Diese Namenskonventionen gibt es schon länger, und begründen ihre historische Entstehung in Sprachen wie Prolog und miniKanren.
+
+\begin{itemize}
+\item \code{conde}:
+Das e steht für \dq{}everyline\dq{} bzw. das jede Zeile von \code{conde} erfolgreich sein, bzw. true zurückgeben kann.
+
+\item \code{conda}:
+(Soft cut) Sobald der \dq{}HEAD\dq{} einer Bedingungsanweisung erfolgreich ist, liefert \code{conda} \code{true} zurück und ignoriert alle nachfolgenden Anweisungen. \code{conda} ist nicht-relational.
+
+\item \code{condu}:
+(Commited choice) Soblad der \dq{}HEAD\dq{} einer Bedingungsanweisung erfolgreich ist, ŵerden die verbleibenden \dq{}goals\dq{} der Anweisung nur einmal ausgeführt. \code{condu} ist nicht-relational.
+
+\item \code{membero}, \code{anyo}:
+Das \dq{}o\dq{} bedeutet das hier eine Relation behandelt wird.
+\end{itemize}
 
 
 \subsubsection{Aufruf des Solvers}
