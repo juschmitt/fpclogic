@@ -15,6 +15,17 @@ Das einfachste Beispiel dazu ist eine Überprüfung, ob eine Variable nicht glei
 \end{lstlisting}
 Das Ergebnis dazu sieht so aus: \code{((\_0 :- (!= \_0 1)))} Das liest sich wie folgt: q kann jeden Wert annehmen, solange dieser Wert nicht gleich 1 ist.
 
+Die Anwendung von Ungleichheiten wird bei etwas komplexeren Termen auch wesentlich interessanter:
+\begin{lstlisting}
+(run * [q]
+	(fresh [x y]
+	(!= [1 x] [y 2])
+	(== q [x y])
+)
+\end{lstlisting}
+Das Ergebnis zu diesem Beispiel ist interessant, da sich der Ausdruck wie folgt beschreiben lässt: Es sollte niemals vorkommen, dass x = 2 ist \textbf{und} dass y = 1 ist. Das bedeutet, ist y = 5 ist die Bedingung erfolgreich und wird abgebrochen, ist aber y = 1 wird weiter überprüft, ob x jemals 2 wird.
+
+
 \subsubsection{CLP(FD)}
 Constraint logic programming over finite domains arbeitet mit endlichen Mengen und weist diese Variablen zu. So kann eine Variable zum Beispiel eine Zahl zwischen 1 und 5 annehmen. Das Paket core.logic.fd führt auch noch einige weitere neue Operatoren ein:
 \begin{itemize}
@@ -47,3 +58,16 @@ Ein weitere Beispiel dazu:
 )
 \end{lstlisting}
 Ergebnis: \code{([1 9][2 8][3 7][4 6][5 5][6 4][7 3][8 2][9 1])}
+
+Weiterhin gibt es noch den sehr nützlichen Operator \code{distinct}. Dieser garantiert, dass alle ihm übergebenen Variablen die auf finite domains aufbauen niemals den gleichen Wert annehmen:
+\begin{lstlisting}
+(run * [q]
+	(fresh [x y]
+	(fd/in x y (fd/interval 1 10))
+	(fd/+ x y 10)
+	(fd/distinct [x y])
+	(== q [x y]))
+)
+\end{lstlisting}
+Das Ergebnis hier: \code{([1 9] [2 8] [3 7] [4 6] [6 4] [7 3] [8 2] [9 1])}
+Hierbei fällt auf: \code{[5 5]} ist nicht mehr in der Ergebnismenge enthalten, da dabei x und y nicht unterschiedlich sind.
