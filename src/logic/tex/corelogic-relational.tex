@@ -13,14 +13,13 @@ plus: N x N -> N
 				1   2   3
 				2   2   4
 \end{lstlisting}
-
 Somit können wir unseren Solver nutzen, um zu prüfen ob eine bestimmte Kombination von Argumenten erlaubt ist.
+
 \begin{lstlisting}
 plus_o Relation	 N x N x N
 		-(1 1 1)- nicht erlaubt
 		 (1 1 2) erlaubt
 \end{lstlisting}
-
 Relationale Programmierung kann rückwärts ausgewertet werden
 
 \begin{lstlisting}
