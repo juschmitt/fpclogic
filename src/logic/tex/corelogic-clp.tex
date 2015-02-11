@@ -58,7 +58,7 @@ Ein weitere Beispiel dazu:
 )
 \end{lstlisting}
 Ergebnis: \code{([1 9][2 8][3 7][4 6][5 5][6 4][7 3][8 2][9 1])}
-
+\\
 Weiterhin gibt es noch den sehr nützlichen Operator \code{distinct}. Dieser garantiert, dass alle ihm übergebenen Variablen die auf finite domains aufbauen niemals den gleichen Wert annehmen:
 \begin{lstlisting}
 (run * [q]
@@ -69,5 +69,5 @@ Weiterhin gibt es noch den sehr nützlichen Operator \code{distinct}. Dieser gar
 	(== q [x y]))
 )
 \end{lstlisting}
-Das Ergebnis hier: \code{([1 9] [2 8] [3 7] [4 6] [6 4] [7 3] [8 2] [9 1])}
+Das Ergebnis hier: \code{([1 9] [2 8] [3 7] [4 6] [6 4] [7 3] [8 2] [9 1])}\\
 Hierbei fällt auf: \code{[5 5]} ist nicht mehr in der Ergebnismenge enthalten, da dabei x und y nicht unterschiedlich sind.
